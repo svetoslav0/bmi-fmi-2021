@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 RUN ls /app/
 
 EXPOSE 5000
-CMD ["python", "/app/main.py"]
+CMD ["python", "/app/flask_test.py"]

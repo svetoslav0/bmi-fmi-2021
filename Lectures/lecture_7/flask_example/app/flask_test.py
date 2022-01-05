@@ -5,7 +5,12 @@ import os
 app = Flask(__name__)
 server = "https://rest.ensembl.org"
 
-@app.route('/family/<name>')
+@app.route('/hello/<name>', methods=["PUT"])
+def hello(name):
+    return "Hello " + str(name) + str(request.get_data()), 200
+
+
+@app.route('/protein/family/<name>')
 def index(name):
     ext = "/family/id/"+str(name)+"?"
     r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
@@ -30,4 +35,4 @@ def protein(id):
 # With debug=True, Flask server will auto-reload 
 # when there are code changes
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=5000, debug=False)
+	app.run(host='0.0.0.0', port=5005, debug=True)
