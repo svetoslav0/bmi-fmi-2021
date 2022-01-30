@@ -1,6 +1,6 @@
 import express from 'express';
 import axios from 'axios';
-import fasta from 'fasta-parser';
+import parser from 'bio-parsers';
 
 import { APISpecification } from './APISpecification.js';
 
@@ -37,13 +37,20 @@ router.get('/gene/:id/sequence', async (req, res) => {
     });
 });
 
-router.get('/sequence/:id/?content-type=fasta', async (req, res) => {
+router.get('/sequence/:id', async (req, res) => {
     const id = req.params.id;
 
-    const fastaResult = await axios.get(`https://rest.ensembl.org/sequence/id/${id}?content-type=text/x-fasta`);
-    console.log(fastaResult);
+    const data = await axios.get(`https://rest.ensembl.org/sequence/id/${id}?content-type=text/x-fasta`);
+    const fasta = parser.fastaToJson(data.data);
 
-    return res.send('test');
+    const result = fasta.map(f => {
+        return {
+            id: f.parsedSequence.name,
+            seq: f.parsedSequence.sequence
+        };
+    });
+
+    return res.send(result);
 });
 
 export { router };

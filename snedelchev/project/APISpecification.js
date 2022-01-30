@@ -17,14 +17,19 @@ export const APISpecification = () => {
         tags: [
             {
                 name: 'Gene',
-                description: 'Gene Paths'
+                description: 'Gene Related Paths'
+            },
+            {
+                name: 'Sequence',
+                description: 'Sequence Related Paths'
             }
         ],
         paths: {
             '/gene/{id}/sequence': {
                 get: {
                     tags: [
-                        'Gene'
+                        'Gene',
+                        'Sequence'
                     ],
                     summary: 'Get gene sequence',
                     description: 'Get gene sequence and list of exons by provided ID.',
@@ -43,6 +48,33 @@ export const APISpecification = () => {
                             description: 'Gene data with exons',
                             schema: {
                                 $ref: '#/definitions/GeneData'
+                            }
+                        } // TODO: Add 400 response schema
+                    }
+                }
+            },
+            '/sequence/{id}': {
+                get: {
+                    tags: [
+                        'Sequence'
+                    ],
+                    summary: 'Sequence data',
+                    description: 'Returns sequence and it\'s ID',
+                    operationId: 'getSequenceData',
+                    parameters: [
+                        {
+                            name: 'id',
+                            in: 'path',
+                            description: 'The ID of the gene',
+                            required: true,
+                            type: 'string'
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: 'Sequences data',
+                            schema: {
+                                $ref: '#/definitions/SequencesData'
                             }
                         } // TODO: Add 400 response schema
                     }
@@ -80,6 +112,26 @@ export const APISpecification = () => {
                     id: {
                         type: 'string',
                         description: 'Exon ID'
+                    }
+                }
+            },
+            SequencesData: {
+                type: 'array',
+                description: 'List of sequences',
+                items: {
+                    $ref: '#/definitions/SequenceData'
+                }
+            },
+            SequenceData: {
+                type: 'object',
+                properties: {
+                    id: {
+                        type: 'string',
+                        description: 'Sequence ID with it\'s metadata'
+                    },
+                    seq: {
+                        type: 'string',
+                        description: 'The sequence itself'
                     }
                 }
             }
