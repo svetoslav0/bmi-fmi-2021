@@ -2,7 +2,7 @@ const APPLICATION_VERSION = '1.0.0';
 const CONTACT_EMAIL = 'svet.nedelchev@gmail.com';
 const APPLICATION_HOST = 'localhost:9091'; // TODO: get the host from config
 
-export const APISpecification = () => {
+export const ApiSpecification = () => {
     return {
         swagger: '2.0',
         info: {

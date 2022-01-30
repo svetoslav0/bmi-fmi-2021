@@ -2,12 +2,14 @@ import express from 'express';
 import axios from 'axios';
 import parser from 'bio-parsers';
 
-import { APISpecification } from './APISpecification.js';
+import { ApiError } from './ApiError.js';
+import { ApiSpecification } from './ApiSpecification.js';
+import { GC, getBasesFromSwapParam, swapBases } from './utils.js';
 
 const router = express.Router();
 
 router.get('/specification', (req, res) => {
-    const specification = APISpecification();
+    const specification = ApiSpecification();
 
     return res.send(specification);
 });
@@ -34,6 +36,39 @@ router.get('/gene/:id/sequence', async (req, res) => {
     return res.send({
         seq,
         exons
+    });
+});
+
+router.get('/sequence/:id/gc_content', async (req, res) => {
+    const id = req.params.id; // &swap=A:T
+
+    const seqResult = await axios.get(`https://rest.ensembl.org/sequence/id/${id}`);
+    const { seq } = seqResult.data;
+
+    let swap_seq = seq;
+
+    try {
+        const [swapBaseOne, swapBaseTwo] = getBasesFromSwapParam(req.query.swap);
+
+        if (swapBaseOne && swapBaseTwo) {
+            swap_seq = swapBases(seq, swapBaseOne, swapBaseTwo);
+        }
+    } catch (e) {
+        if (e instanceof ApiError) {
+            return res
+                .status(400)
+                .send({
+                    message: e.message
+                });
+        }
+
+        throw e;
+    }
+
+    return res.send({
+        seq,
+        gc_content: GC(seq),
+        swap_seq
     });
 });
 
