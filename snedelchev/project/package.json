@@ -14,6 +14,7 @@
     "body-parser": "^1.19.1",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "fasta-parser": "^0.1.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "request": "^2.88.2"
