@@ -4,7 +4,7 @@ import parser from 'bio-parsers';
 
 import { ApiError } from './ApiError.js';
 import { ApiSpecification } from './ApiSpecification.js';
-import { GC, getBasesFromSwapParam, swapBases } from './utils.js';
+import {GC, getBasesFromSwapParam, getSequence, swapBases} from './utils.js';
 
 const router = express.Router();
 
@@ -17,8 +17,16 @@ router.get('/specification', (req, res) => {
 router.get('/gene/:id/sequence', async (req, res) => {
     const id = req.params.id; // ENSG00000157764
 
-    const seqResult = await axios.get(`https://rest.ensembl.org/sequence/id/${id}`);
-    const { seq } = seqResult.data;
+    let seq = null;
+    try {
+        seq = await getSequence(id);
+    } catch (e) {
+        return res
+            .status(400)
+            .send({
+                message: e.message
+            });
+    }
 
     const exonsResult = (await axios.get(`https://rest.ensembl.org/lookup/id/${id}?expand=1`))
         .data
@@ -42,8 +50,16 @@ router.get('/gene/:id/sequence', async (req, res) => {
 router.get('/sequence/:id/gc_content', async (req, res) => {
     const id = req.params.id; // &swap=A:T
 
-    const seqResult = await axios.get(`https://rest.ensembl.org/sequence/id/${id}`);
-    const { seq } = seqResult.data;
+    let seq = null;
+    try {
+        seq = await getSequence(id);
+    } catch (e) {
+        return res
+            .status(400)
+            .send({
+                message: e.message
+            });
+    }
 
     let swap_seq = seq;
 

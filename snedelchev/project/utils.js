@@ -1,4 +1,5 @@
 import { ApiError } from './ApiError.js';
+import axios from "axios";
 
 /**
  * @param {string} sequence
@@ -40,4 +41,13 @@ export const swapBases = (seq, swapBaseOne, swapBaseTwo) => { // A, C
         .split(swapBaseTwo.toLowerCase())
         .join(swapBaseOne.toUpperCase())
         .toUpperCase();
+};
+
+export const getSequence = async (id) => {
+    try {
+        const seqResult = await axios.get(`https://rest.ensembl.org/sequence/id/${id}`);
+        return seqResult.data.seq;
+    } catch (e) {
+        throw new ApiError(`ID ${id} was not found`);
+    }
 };
