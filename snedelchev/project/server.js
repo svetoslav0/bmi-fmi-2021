@@ -13,3 +13,5 @@ app.use(router);
 // todo: add express exception handler
 
 app.listen(port, () => console.log(`Running on port ${port} . . .`));
+
+export default app;
