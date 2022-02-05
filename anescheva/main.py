@@ -8,7 +8,6 @@ app = Flask(__name__)
 @app.route('/v1/sequence/gene/<id>')
 def get_exons(id):
     # id = 'ENSG00000157764'
-    # id = '123'
 
     seq_response = requests.get('https://rest.ensembl.org/sequence/id/' + id, headers={"Content-Type": "application/json"})
     seq_json = seq_response.json()
