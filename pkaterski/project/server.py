@@ -12,6 +12,8 @@ def sequence_gene(id='ENST00000645032'):
     seq_req = requests.get(url = f'{url}sequence/id/{id}', headers = hs)
     exp_req = requests.get(url = f'{url}lookup/id/{id}?expand=1', headers = hs)
 
+    follow_exon_seq = request.args.get('exon_seq') == '1'
+
 
     if seq_req.ok and exp_req.ok:
         seq = ''
@@ -21,14 +23,18 @@ def sequence_gene(id='ENST00000645032'):
             exp_json = exp_req.json()
 
             def extract_exon(ex):
+                exon = { 'start': ex['start'], 'end': ex['end'], 'id': ex['id'] }
+                return exon
+
+            def get_exon_seq(ex):
                 ex_id = ex['id']
-                exon = { 'start': ex['start'], 'end': ex['end'], 'id': ex_id }
                 try:
                     r = requests.get(url = f'{url}sequence/id/{ex_id}', headers = hs).json()
-                    exon['seq'] = r['seq']
-                    return exon
+                    ex['seq'] = r['seq']
+                    return ex
                 except Exception as e:
-                    return exon
+                    return ex
+
 
 
             if 'Exon' in exp_json:
@@ -38,8 +44,12 @@ def sequence_gene(id='ENST00000645032'):
                         list(map(lambda x: list(map(extract_exon, x['Exon'])),
                              exp_json['Transcript'])),
                         [])
+                exons = list(set(exons))
         except Exception as e:
             return f'error {e}'
+
+        if follow_exon_seq:
+            exons = list(map(get_exon_seq, exons))
 
         return jsonify(
                 seq=seq,
