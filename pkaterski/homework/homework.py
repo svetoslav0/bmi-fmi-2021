@@ -96,14 +96,14 @@ def orf(dna_seq):
 
         current_protein = ''
         for i in range(lc):
-            if len(current_protein) != 0:
-                if seq_codons[i] not in stops:
-                    current_protein += codon_dict[seq_codons[i]]
-                else:
-                    protein_seqs.append(current_protein)
-                    current_protein = ''
-            elif seq_codons[i] in starts:
-                current_protein += codon_dict[seq_codons[i]]
+            if seq_codons[i] in starts:
+                for j in range(i, lc):
+                    if seq_codons[j] not in stops:
+                        current_protein += codon_dict[seq_codons[j]]
+                    else:
+                        protein_seqs.append(current_protein)
+                        current_protein = ''
+                        break
         return protein_seqs
 
     rev_comp = str(Seq(dna_seq).reverse_complement())
