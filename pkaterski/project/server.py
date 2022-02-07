@@ -4,11 +4,11 @@ import requests
 app = Flask(__name__)
 
 url = 'https://rest.ensembl.org/'
+hs = { "content-type": "application/json" }
 
 @app.route('/v1/sequence/gene/<id>/exons')
 def sequence_gene(id='ENST00000645032'):
 
-    hs = { "content-type": "application/json" }
     seq_req = requests.get(url = f'{url}sequence/id/{id}', headers = hs)
     exp_req = requests.get(url = f'{url}lookup/id/{id}?expand=1', headers = hs)
 
