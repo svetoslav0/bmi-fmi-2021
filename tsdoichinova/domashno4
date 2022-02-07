@@ -1,0 +1,6 @@
+with open('dna_chromosome_1.seq', 'r') as seq:
+    sequence = seq.readline()
+    sequence = sequence.replace('T', 'a').replace('A', 't')
+
+    with open('dna_chromosome_solve_1.seq', 'w') as result:
+        result.write(sequence.upper())
