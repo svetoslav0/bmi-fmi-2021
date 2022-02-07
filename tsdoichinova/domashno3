@@ -1,0 +1,5 @@
+from Bio import SeqIO
+
+for read in SeqIO.parse('fasta_seq_1.fa', 'fasta'):
+    result = read.seq.count('T')
+    print(result)
