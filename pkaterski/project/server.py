@@ -88,7 +88,7 @@ def swap(id):
 
         return jsonify(res)
     except Exception as e:
-        return f"an error occured {e}"
+        return f"an error occured {e}", 500
 
 
 
