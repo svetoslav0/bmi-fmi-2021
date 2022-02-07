@@ -53,3 +53,27 @@ def task5():
         f.write(str(seq_rna))
 
 
+# Да се реши следата задача от rosalind -> http://rosalind.info/problems/subs/
+def subs(s, t):
+    ls = len(s)
+    lt = len(t)
+    locations = []
+
+    for i in range(ls):
+        full_match = True
+        for j in range(lt):
+            if s[i + j] != t[j]:
+                full_match = False
+                break
+
+        if full_match:
+            locations.append(i + 1)
+
+    return locations
+
+
+def task6():
+    print(subs('GATATATGCATATACTT', 'ATAT'))
+    print(subs('AUGCUUCAGAAAGGUCUUACG', 'U'))
+    print(subs('AUGCUUCAGAAAGGUCUUACG', 'UGCU'))
+
