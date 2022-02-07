@@ -58,12 +58,6 @@ def sequence_gene(id='ENST00000645032'):
 
     return f'{url} returned an error (sequence request: {seq_req.text}, \
             expanded request: {exp_req.text}'
-    # gc_content = request.args.get('gc_content', '')
-    # swap = ''
-    # if gc_content:
-    #     swap = request.args.get('swap', '')
-    # content_type = request.args.get('content-type', '')
-    # return f"The id is {escape(id)}, gc_content={gc_content}, swap={swap}, content_type={content_type}"
 
 
 
