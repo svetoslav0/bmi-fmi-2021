@@ -42,4 +42,14 @@ def task4():
 
 # Да се прочете DNA секвенция от файл [data/dna_chromosome_1.seq] и да се преобразува във RNA като резултатът се запише в нов файл като секвенцията е в обратен ред. (15т.)
 def task5():
-    ...
+    lines = []
+    with open('data/dna_chromosome_1.seq', 'r') as ls:
+        for line in ls:
+            lines.append(line.replace('\n', ''))
+
+    seq_dna = Seq(''.join(lines))
+    seq_rna = seq_dna.transcribe()[::-1]
+    with open('data/rna_chromosome_1_reversed.seq', 'w') as f:
+        f.write(str(seq_rna))
+
+
