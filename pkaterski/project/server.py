@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 url = 'https://rest.ensembl.org/'
 
-@app.route('/v1/sequence/gene/<id>/')
+@app.route('/v1/sequence/gene/<id>/exons')
 def sequence_gene(id='ENST00000645032'):
 
     hs = { "content-type": "application/json" }
