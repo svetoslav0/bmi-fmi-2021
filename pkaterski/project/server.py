@@ -45,7 +45,7 @@ def sequence_gene(id='ENST00000645032'):
                         list(map(lambda x: list(map(extract_exon, x['Exon'])),
                              exp_json['Transcript'])),
                         [])
-                exons = list(set(exons))
+                #exons = list(set(exons))
         except Exception as e:
             return f'error {e}', 500
 
@@ -61,9 +61,8 @@ def sequence_gene(id='ENST00000645032'):
             expanded request: {exp_req.text}', 500
 
 
-@app.route('/v1/sequence/gene/<id>/')
+@app.route('/v1/sequence/gene/<id>/swap')
 def swap(id):
-    gc_content = request.args.get('gc_content')
     swap = request.args.get('swap')
     gc_content = request.args.get('gc_content') == 'true'
 
