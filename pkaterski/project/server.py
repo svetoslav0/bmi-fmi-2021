@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import requests
+from Bio.SeqUtils import GC
 
 app = Flask(__name__)
 
@@ -60,7 +61,34 @@ def sequence_gene(id='ENST00000645032'):
             expanded request: {exp_req.text}', 500
 
 
+@app.route('/v1/sequence/gene/<id>/')
+def swap(id):
+    gc_content = request.args.get('gc_content')
+    swap = request.args.get('swap')
+    gc_content = request.args.get('gc_content') == 'true'
 
+    bases = ['A', 'T', 'G', 'C']
+
+    if not swap or len(swap) != 3\
+    or swap[1] != ':'\
+    or swap[0].upper() not in bases\
+    or swap[2].upper() not in bases:
+        return 'invalid swap arg', 400
+
+
+    try:
+        seq = requests.get(url = f'{url}sequence/id/{id}', headers = hs)\
+            .json()['seq'].upper()
+        a = ord(swap[0].upper())
+        b = ord(swap[2].upper())
+        swapped = seq.translate({ a: b, b: a })
+        res = { 'seq': seq, 'swap_sequence': swapped}
+        if gc_content:
+            res['gc_content'] = GC(seq)
+
+        return jsonify(res)
+    except Exception as e:
+        return f"an error occured {e}"
 
 
 
