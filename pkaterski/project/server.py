@@ -32,7 +32,7 @@ def sequence_gene(id='ENST00000645032'):
                     r = requests.get(url = f'{url}sequence/id/{ex_id}', headers = hs).json()
                     ex['seq'] = r['seq']
                     return ex
-                except Exception as e:
+                except Exception:
                     return ex
 
 
@@ -46,7 +46,7 @@ def sequence_gene(id='ENST00000645032'):
                         [])
                 exons = list(set(exons))
         except Exception as e:
-            return f'error {e}'
+            return f'error {e}', 500
 
         if follow_exon_seq:
             exons = list(map(get_exon_seq, exons))
@@ -57,7 +57,7 @@ def sequence_gene(id='ENST00000645032'):
         )
 
     return f'{url} returned an error (sequence request: {seq_req.text}, \
-            expanded request: {exp_req.text}'
+            expanded request: {exp_req.text}', 500
 
 
 
