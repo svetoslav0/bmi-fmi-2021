@@ -1,6 +1,8 @@
 from collections import Counter
+import textwrap as tw
 from Bio.Seq import Seq
 from Bio import SeqIO
+import Bio.Data.CodonTable
 
 
 # Да се намери честотата на срещане на “А” Аденин в секвенцията: ATAGTGGGAAGATTTATA
@@ -77,3 +79,48 @@ def task6():
     print(subs('AUGCUUCAGAAAGGUCUUACG', 'U'))
     print(subs('AUGCUUCAGAAAGGUCUUACG', 'UGCU'))
 
+
+# Да се реши следата задача от rosalind -> http://rosalind.info/problems/orf/
+def orf(dna_seq):
+    codon_table = Bio.Data.CodonTable.unambiguous_dna_by_id[28]
+    starts = codon_table.start_codons
+    stops = codon_table.stop_codons
+    codon_dict = codon_table.forward_table
+
+    def seq_to_proteins(_seq):
+        protein_seqs = []
+        l = len(_seq)
+        seq = _seq[0 : l - l % 3]
+        seq_codons = tw.wrap(seq, 3)
+        lc = len(seq_codons)
+
+        current_protein = ''
+        for i in range(lc):
+            if len(current_protein) != 0:
+                if seq_codons[i] not in stops:
+                    current_protein += codon_dict[seq_codons[i]]
+                else:
+                    protein_seqs.append(current_protein)
+                    current_protein = ''
+            elif seq_codons[i] in starts:
+                current_protein += codon_dict[seq_codons[i]]
+        return protein_seqs
+
+    rev_comp = str(Seq(dna_seq).reverse_complement())
+
+    return sum(
+            [
+                seq_to_proteins(dna_seq),
+                seq_to_proteins(dna_seq[1:]),
+                seq_to_proteins(dna_seq[2:]),
+                seq_to_proteins(rev_comp),
+                seq_to_proteins(rev_comp[1:]),
+                seq_to_proteins(rev_comp[2:]),
+                ],
+            [])
+
+
+def task7():
+    dna_seq = 'AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG'
+    print(orf(dna_seq))
+    
