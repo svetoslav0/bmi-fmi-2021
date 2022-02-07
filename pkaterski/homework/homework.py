@@ -108,7 +108,7 @@ def orf(dna_seq):
 
     rev_comp = str(Seq(dna_seq).reverse_complement())
 
-    return sum(
+    res = sum(
             [
                 seq_to_proteins(dna_seq),
                 seq_to_proteins(dna_seq[1:]),
@@ -118,6 +118,8 @@ def orf(dna_seq):
                 seq_to_proteins(rev_comp[2:]),
                 ],
             [])
+
+    return list(set(res))
 
 
 def task7():
