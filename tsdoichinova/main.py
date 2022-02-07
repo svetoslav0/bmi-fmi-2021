@@ -31,7 +31,6 @@ def gene(id):
     base_two = swap[2]
 
     sequence_swapped = None
-    sequence = sequence.replace('T', 'a').replace('A', 't')
 
     if base_one == 'A' and base_two == 'T':
         sequence_swapped = sequence.replace('T', 'a').replace('A', 't')
