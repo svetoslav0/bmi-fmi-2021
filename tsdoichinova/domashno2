@@ -1,0 +1,6 @@
+with open('sequence_1.seq', 'r') as f:
+    sequence = f.readline()
+    result = sequence[::-1]
+    
+    with open('reverse_sequence_1.seq', 'w') as file:
+        file.write(result)
