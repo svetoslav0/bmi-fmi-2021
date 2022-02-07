@@ -1,0 +1,8 @@
+from Bio.Seq import Seq
+
+with open('dna_chromosome_1.seq', 'r') as sequence:
+    sequence = Seq(sequence.readline())
+    rna = str(sequence.transcribe())
+
+    with open('rna_reversed.seq', 'w') as result:
+        result.write(rna[::-1])
