@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response, jsonify
 import requests
 from Bio.SeqUtils import GC
 
@@ -89,6 +89,27 @@ def swap(id):
         return jsonify(res)
     except Exception as e:
         return f"an error occured {e}", 500
+
+
+@app.route('/v1/sequence/<id>/content')
+def content(id):
+    xhs = { "content-type": "text/x-fasta" }
+    ctype = request.args.get('content-type')
+    try:
+        seq = requests.get(url = f'{url}sequence/id/{id}', headers = xhs)
+        if not ctype:
+            return 'missing content-type', 400
+        if ctype.lower() == 'fasta':
+            return Response(seq.text, mimetype='text/plain')
+        elif ctype.lower() == 'x-fasta':
+            lines = seq.text.split('\n')
+            xseq = { 'id': lines[0], 'seq': ''.join(lines[1:]) }
+            return xseq
+        else:
+            return f"invalid content-type: {ctype}", 400
+    except Exception as e:
+        return f"an error occured {e}", 500
+
 
 
 
