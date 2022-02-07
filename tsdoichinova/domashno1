@@ -1,0 +1,6 @@
+from Bio.Seq import Seq
+
+sequence = Seq('ATAGTGGGAAGATTTATA')
+result = sequence.count('A')
+
+print(sequence)
