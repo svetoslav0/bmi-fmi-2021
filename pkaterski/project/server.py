@@ -1,6 +1,9 @@
 from flask import Flask, request, Response, jsonify
 import requests
 from Bio.SeqUtils import GC
+import textwrap as tw
+from Bio.Seq import Seq
+import Bio.Data.CodonTable
 
 app = Flask(__name__)
 
@@ -111,6 +114,57 @@ def content(id):
 
 
 
+codon_table = Bio.Data.CodonTable.unambiguous_dna_by_id[28]
 
+def orf(dna_seq):
+    starts = codon_table.start_codons
+    stops = codon_table.stop_codons
+    codon_dict = codon_table.forward_table
+
+    def seq_to_proteins(_seq):
+        protein_seqs = []
+        l = len(_seq)
+        seq = _seq[0 : l - l % 3]
+        seq_codons = tw.wrap(seq, 3)
+        lc = len(seq_codons)
+
+        current_protein = ''
+        for i in range(lc):
+            if seq_codons[i] in starts:
+                for j in range(i, lc):
+                    if seq_codons[j] not in stops:
+                        sq = seq_codons[j]
+                        current_protein += codon_dict[sq] if sq in codon_dict else 'Unk'
+                    else:
+                        protein_seqs.append(current_protein)
+                        current_protein = ''
+                        break
+        return protein_seqs
+
+    rev_comp = str(Seq(dna_seq).reverse_complement())
+
+    res = sum(
+            [
+                seq_to_proteins(dna_seq),
+                seq_to_proteins(dna_seq[1:]),
+                seq_to_proteins(dna_seq[2:]),
+                seq_to_proteins(rev_comp),
+                seq_to_proteins(rev_comp[1:]),
+                seq_to_proteins(rev_comp[2:]),
+                ],
+            [])
+
+    return list(set(res))
+
+
+@app.route('/v1/sequence/<id>/orf')
+def get_orf(id):
+    try:
+        seq = requests.get(url = f'{url}sequence/id/{id}', headers = hs)\
+            .json()['seq'].upper()
+
+        return jsonify(orf(seq))
+    except Exception as e:
+        return f"an error occured {e}", 500
 
 
