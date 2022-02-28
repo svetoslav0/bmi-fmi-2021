@@ -1,3 +1,4 @@
+from calendar import leapdays
 import pandas as pd
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
@@ -9,13 +10,16 @@ from sklearn import linear_model
 data = pd.read_csv('data/covid.csv')
 print(data.columns)
 
+
+
 data['diff_deceased'] = data['deceased'].diff()
 data['diff_swabs'] = data['swabs'].diff()
 dates = data['date']
 date_format = [pd.to_datetime(d) for d in dates]
 
-variable = 'new_positives'
-name = "New positive"
+variable = 'hospitalized_with_symptoms'
+name = "Deceased"
+
 fig, ax = plt.subplots(figsize=(12, 5))
 ax.grid()
 ax.scatter(date_format, data[variable])
@@ -45,11 +49,14 @@ fig.savefig(name + '.png')
 plt.show()
 
 
+
+from sklearn.ensemble import RandomForestRegressor
 data['serious_deaths'] = data['diff_deceased'] + data['diff_swabs']
 # prepare the lists for the model
 X = date_format
-y = data['serious_deaths'].tolist()[1:]
+y = data['hospitalized_with_symptoms'].tolist()[1:]
 # date format is not suitable for modeling, let's transform the date into incrementals number starting from April 1st
+
 starting_date = 37  # April 1st is the 37th day of the series
 day_numbers = []
 for i in range(1, len(X)):
@@ -59,7 +66,10 @@ X = day_numbers
 X = X[starting_date:]
 y = y[starting_date:]
 # Instantiate Linear Regression
-linear_regr = linear_model.LinearRegression()
+linear_regr = RandomForestRegressor()
 # Train the model using the training sets
 linear_regr.fit(X, y)
-print ("Linear Regression Model Score: %s" % (linear_regr.score(X, y)))
+
+print(linear_regr.predict([59228, 19228]))
+
+print ("Model Score: %s" % (linear_regr.score(X, y)))
