@@ -1,0 +1,222 @@
+BLASTP 2.12.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for composition-based statistics: Alejandro A. Schaffer,
+L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+"Improving the accuracy of PSI-BLAST protein database searches with
+composition-based statistics and other refinements", Nucleic Acids
+Res. 29:2994-3005.
+
+
+
+Database: PDB protein database
+           136,281 sequences; 36,687,441 total letters
+
+
+
+Query= AKI71165.1 CARTPT, partial [synthetic construct]
+
+Length=116
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+1HY9_A Chain A, COCAINE AND AMPHETAMINE REGULATED TRANSCRIPT PROT...  89.7    7e-25
+3N0L_A Crystal structure of serine hydroxymethyltransferase from ...  29.6    1.2  
+6XYW_Bd Chain Bd, At1g64880 [Arabidopsis thaliana]                    28.5    3.1  
+2HRO_A Structure of the full-lenght Enzyme I of the PTS system fr...  28.1    3.8  
+7K58_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena th...  28.1    4.3  
+7K5B_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena th...  28.1    4.3  
+7MOQ_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena th...  28.1    4.3  
+6ZYW_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena th...  28.1    4.3  
+5OVY_A Crystal structure of MAB_4384 tetR [Mycobacteroides absces...  26.9    7.2  
+1X0U_A Crystal Structure of the carboxyl transferase subunit of p...  26.9    9.4  
+6OYC_A Glycosylation Associate Protein (Gap123) complex from Stre...  26.9    9.8  
+
+
+>1HY9_A Chain A, COCAINE AND AMPHETAMINE REGULATED TRANSCRIPT PROTEIN 
+[Homo sapiens]
+Length=41
+
+ Score = 89.7 bits (221),  Expect = 7e-25, Method: Compositional matrix adjust.
+ Identities = 41/41 (100%), Positives = 41/41 (100%), Gaps = 0/41 (0%)
+
+Query  76   YGQVPMCDAGEQCAVRKGARIGKLCDCPRGTSCNSFLLKCL  116
+            YGQVPMCDAGEQCAVRKGARIGKLCDCPRGTSCNSFLLKCL
+Sbjct  1    YGQVPMCDAGEQCAVRKGARIGKLCDCPRGTSCNSFLLKCL  41
+
+
+>3N0L_A Crystal structure of serine hydroxymethyltransferase from Campylobacter 
+jejuni [Campylobacter jejuni]
+ 3N0L_B Crystal structure of serine hydroxymethyltransferase from Campylobacter 
+jejuni [Campylobacter jejuni]
+Length=417
+
+ Score = 29.6 bits (65),  Expect = 1.2, Method: Composition-based stats.
+ Identities = 21/65 (32%), Positives = 35/65 (54%), Gaps = 2/65 (3%)
+
+Query  10   PLLGAALLLMLPLLGTRAQEDAELQPRALDIYSAVDDASHEKELIEALQEVFKKLKSKRV  69
+            P + + L L  P L  R  ++ E +  +  I   +DD ++EK L E +++  KKL S  +
+Sbjct  352  PFITSGLRLGTPALTARGFKEKEXEIVSNYIADILDDVNNEK-LQENIKQELKKLASNFI  410
+
+Query  70   PIYEK  74
+             IYE+
+Sbjct  411  -IYER  414
+
+
+>6XYW_Bd Chain Bd, At1g64880 [Arabidopsis thaliana]
+Length=515
+
+ Score = 28.5 bits (62),  Expect = 3.1, Method: Composition-based stats.
+ Identities = 16/47 (34%), Positives = 25/47 (53%), Gaps = 1/47 (2%)
+
+Query  50   EKELIEALQEVFKKLKSKRVPIYEKKYGQVPMCDAGEQCAVRKGARI  96
+            E+E+ E  ++     + KR P+Y K Y  V + D  + C V KG R+
+Sbjct  332  EEEIRELAEDRNALTEKKRQPLYRKGY-DVHVIDVKKVCKVTKGGRV  377
+
+
+>2HRO_A Structure of the full-lenght Enzyme I of the PTS system from 
+Staphylococcus carnosus [Staphylococcus carnosus]
+Length=573
+
+ Score = 28.1 bits (61),  Expect = 3.8, Method: Composition-based stats.
+ Identities = 19/64 (30%), Positives = 29/64 (45%), Gaps = 3/64 (5%)
+
+Query  40   IYSAVDDASHEKELIEALQEVFKKLKSKRVPIYEKKYG---QVPMCDAGEQCAVRKGARI  96
+            +Y   D    E+E  EA + V + +K KRV +     G   ++P  D  E+     G R 
+Sbjct  301  LYMGRDQMPTEEEQFEAYKAVLEAMKGKRVVVRTLDIGGDKELPYLDLPEEMNPFLGYRA  360
+
+Query  97   GKLC  100
+             +LC
+Sbjct  361  IRLC  364
+
+
+>7K58_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena thermophila]
+Length=4588
+
+ Score = 28.1 bits (61),  Expect = 4.3, Method: Composition-based stats.
+ Identities = 16/46 (35%), Positives = 24/46 (52%), Gaps = 1/46 (2%)
+
+Query  30    DAELQPRALDIYSAVDDASHEKE-LIEALQEVFKKLKSKRVPIYEK  74
+             D +L    + + S V D    +E +I  ++E+  KLK   VPI EK
+Sbjct  1136  DKKLLMSVMKVISDVKDVEPRREGIITRMKEMVTKLKKHNVPITEK  1181
+
+
+>7K5B_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena thermophila]
+Length=4588
+
+ Score = 28.1 bits (61),  Expect = 4.3, Method: Composition-based stats.
+ Identities = 16/46 (35%), Positives = 24/46 (52%), Gaps = 1/46 (2%)
+
+Query  30    DAELQPRALDIYSAVDDASHEKE-LIEALQEVFKKLKSKRVPIYEK  74
+             D +L    + + S V D    +E +I  ++E+  KLK   VPI EK
+Sbjct  1136  DKKLLMSVMKVISDVKDVEPRREGIITRMKEMVTKLKKHNVPITEK  1181
+
+
+>7MOQ_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena thermophila 
+CU428]
+Length=4594
+
+ Score = 28.1 bits (61),  Expect = 4.3, Method: Composition-based stats.
+ Identities = 16/46 (35%), Positives = 24/46 (52%), Gaps = 1/46 (2%)
+
+Query  30    DAELQPRALDIYSAVDDASHEKE-LIEALQEVFKKLKSKRVPIYEK  74
+             D +L    + + S V D    +E +I  ++E+  KLK   VPI EK
+Sbjct  1136  DKKLLMSVMKVISDVKDVEPRREGIITRMKEMVTKLKKHNVPITEK  1181
+
+
+>6ZYW_B Chain B, Outer arm dynein beta heavy chain [Tetrahymena thermophila 
+SB210]
+ 7KEK_B Chain B, Dynein beta heavy chain [Tetrahymena thermophila]
+Length=4595
+
+ Score = 28.1 bits (61),  Expect = 4.3, Method: Composition-based stats.
+ Identities = 16/46 (35%), Positives = 24/46 (52%), Gaps = 1/46 (2%)
+
+Query  30    DAELQPRALDIYSAVDDASHEKE-LIEALQEVFKKLKSKRVPIYEK  74
+             D +L    + + S V D    +E +I  ++E+  KLK   VPI EK
+Sbjct  1136  DKKLLMSVMKVISDVKDVEPRREGIITRMKEMVTKLKKHNVPITEK  1181
+
+
+>5OVY_A Crystal structure of MAB_4384 tetR [Mycobacteroides abscessus 
+ATCC 19977]
+ 5OVY_B Crystal structure of MAB_4384 tetR [Mycobacteroides abscessus 
+ATCC 19977]
+Length=222
+
+ Score = 26.9 bits (58),  Expect = 7.2, Method: Compositional matrix adjust.
+ Identities = 19/45 (42%), Positives = 23/45 (51%), Gaps = 12/45 (27%)
+
+Query  1    MESSRVRLLPLLGAALLLMLPLLGTRAQEDAELQPRALDIYSAVD  45
+            +E+ R RLLPLL   +         RAQED  L+P A    SA D
+Sbjct  124  VEAGRARLLPLLSKVV--------ERAQEDGYLRPEA----SATD  156
+
+
+>1X0U_A Crystal Structure of the carboxyl transferase subunit of putative 
+PCC of Sulfolobus tokodaii [Sulfurisphaera tokodaii str. 
+7]
+ 1X0U_B Crystal Structure of the carboxyl transferase subunit of putative 
+PCC of Sulfolobus tokodaii [Sulfurisphaera tokodaii str. 
+7]
+ 1X0U_C Crystal Structure of the carboxyl transferase subunit of putative 
+PCC of Sulfolobus tokodaii [Sulfurisphaera tokodaii str. 
+7]
+ 1X0U_D Crystal Structure of the carboxyl transferase subunit of putative 
+PCC of Sulfolobus tokodaii [Sulfurisphaera tokodaii str. 
+7]
+ 1X0U_E Crystal Structure of the carboxyl transferase subunit of putative 
+PCC of Sulfolobus tokodaii [Sulfurisphaera tokodaii str. 
+7]
+ 1X0U_F Crystal Structure of the carboxyl transferase subunit of putative 
+PCC of Sulfolobus tokodaii [Sulfurisphaera tokodaii str. 
+7]
+Length=522
+
+ Score = 26.9 bits (58),  Expect = 9.4, Method: Composition-based stats.
+ Identities = 13/38 (34%), Positives = 20/38 (53%), Gaps = 0/38 (0%)
+
+Query  44   VDDASHEKELIEALQEVFKKLKSKRVPIYEKKYGQVPM  81
+            VDD    K+    +    + LK+KR   Y KK+G +P+
+Sbjct  485  VDDVIEPKDTRRVIVAGLEMLKTKREYRYPKKHGNIPL  522
+
+
+>6OYC_A Glycosylation Associate Protein (Gap123) complex from Streptococcus 
+agalactiae [Streptococcus agalactiae 2603V/R]
+Length=514
+
+ Score = 26.9 bits (58),  Expect = 9.8, Method: Composition-based stats.
+ Identities = 18/48 (38%), Positives = 29/48 (60%), Gaps = 6/48 (13%)
+
+Query  34   QPRALDIYSAVDDASHEKELIEALQEVFK-KLKSKRVPI----YEKKY  76
+            Q R L+IY  VD  SH KEL ++L  ++K  LK+  + +    YE+++
+Sbjct  314  QVRDLEIYFVVDRLSH-KELQKSLTSLYKVMLKNNDIKVTFVSYEREF  360
+
+
+
+Lambda      K        H        a         alpha
+   0.321    0.137    0.402    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 897703800
+
+
+  Database: PDB protein database
+    Posted date:  Mar 5, 2022  4:55 AM
+  Number of letters in database: 36,687,441
+  Number of sequences in database:  136,281
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 11
+Window for multiple hits: 40

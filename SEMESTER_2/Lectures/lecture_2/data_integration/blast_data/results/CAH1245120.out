@@ -1,0 +1,249 @@
+BLASTP 2.12.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for composition-based statistics: Alejandro A. Schaffer,
+L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+"Improving the accuracy of PSI-BLAST protein database searches with
+composition-based statistics and other refinements", Nucleic Acids
+Res. 29:2994-3005.
+
+
+
+Database: PDB protein database
+           136,281 sequences; 36,687,441 total letters
+
+
+
+Query= CAH1245120.1 ZC3H13 [Branchiostoma lanceolatum]
+
+Length=1680
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+6W1S_I Chain I, Mediator of RNA polymerase II transcription subun...  36.6    0.51 
+6TED_Z Structure of complete, activated transcription complex Pol...  34.7    1.7  
+5OIK_Z Structure of an RNA polymerase II-DSIF transcription elong...  34.7    1.8  
+4RCO_A Chain A, 1.9 Angstrom Crystal Structure of Superantigen-li...  33.9    2.3  
+3I2D_A Crystal Structure of S. Cerevisiae SUMO E3 Ligase SIZ1 [Sa...  33.1    4.1  
+5GKA_B cryo-EM structure of human Aichi virus [Aichi virus A846/88]   32.7    5.5  
+6PMG_X Solution structure of the C-terminal zinc finger of the C....  28.5    7.7  
+6KWU_O A Crystal Structure of OspA mutant [Borreliella burgdorfer...  32.0    8.8  
+6J4S_A Structural basis of tubulin detyrosination by vasohibins-S...  32.0    9.1  
+
+
+>6W1S_I Chain I, Mediator of RNA polymerase II transcription subunit 
+14 [Mus musculus]
+Length=1548
+
+ Score = 36.6 bits (83),  Expect = 0.51, Method: Compositional matrix adjust.
+ Identities = 52/177 (29%), Positives = 67/177 (38%), Gaps = 19/177 (11%)
+
+Query  402   SPPSKKQSPSPKPRSPSPVKSRRQSPPSRRRSLTPAKKRRSPSPKQRRRTPSPPPRRNRS  461
+             SPP+   S   +    SP     QSP +   + +P+   R+PSP     TP PP     S
+Sbjct  1028  SPPTSYHSTVNQ----SPSMMHTQSPGNLHAASSPSGALRAPSPASFVPTP-PPSSHGIS  1082
+
+Query  462   PSPPARRRSPSPPKRGRSP-----PSRRRSPSPPPRRRVTPSPPQRR--RSPSPPRRHSP  514
+               P A   SP       SP     PS R    P   +   PSP  R    SP+ P  HSP
+Sbjct  1083  IGPGASFASPHGTLDPSSPYTMVSPSGRAGNWPGSPQVSGPSPATRLPGMSPANPSLHSP  1142
+
+Query  515   SPQRRRSPSPPPRRRQQ---SPPPKRRSPSPPQKRRSVSPPQRRRSPPPSRRRSPSP  568
+              P    SP      +      PPP++     PQ+  + S P        +    PSP
+Sbjct  1143  VPDVSHSPRAGTSSQTMPTNMPPPRKL----PQRSWAASIPTILTHSALNILLLPSP  1195
+
+
+>6TED_Z Structure of complete, activated transcription complex Pol II-DSIF-PAF-SPT6 
+uncovers allosteric elongation activation by 
+RTF1 [Homo sapiens]
+Length=1087
+
+ Score = 34.7 bits (78),  Expect = 1.7, Method: Compositional matrix adjust.
+ Identities = 30/85 (35%), Positives = 40/85 (47%), Gaps = 10/85 (12%)
+
+Query  444  SPKQRRRTPSPPPRRNRSPSPPARRRSPSPPKRGRSPPSRRRSPSPPPRRRVTPSPPQRR  503
+            +P+   +TP  P   N     P    +PSP  +G   P    SPSP    +V PSP   +
+Sbjct  871  NPQYNPQTPGTPAMYNTDQFSP--YAAPSP--QGSYQP----SPSPQSYHQVAPSPAGYQ  922
+
+Query  504  RSPSPPRRH-SPSPQ-RRRSPSPPP  526
+             + SP   H +PSP   + SPSP P
+Sbjct  923  NTHSPASYHPTPSPMAYQASPSPSP  947
+
+
+ Score = 33.5 bits (75),  Expect = 4.8, Method: Compositional matrix adjust.
+ Identities = 34/120 (28%), Positives = 48/120 (40%), Gaps = 18/120 (15%)
+
+Query  442  SPSPKQRRRTPSPPPRRNRSPSPPARRRSPSPPKRGRSPPSRRRSPSPPPRRRVTPSPPQ  501
+            +PSP+    TP+P     ++P  P     PS P+   +P    ++P  P         P 
+Sbjct  845  TPSPQAYGGTPNP-----QTPGYP----DPSSPQV--NPQYNPQTPGTPAMYNTDQFSPY  893
+
+Query  502  RRRSPSPPRRHSPSPQRRRSPSPPPRRRQQSPPPKRRSPSPPQKRRSVSPPQRRRSPPPS  561
+               SP    + SPSPQ     +P P   Q +  P    P+P       SP   + SP PS
+Sbjct  894  AAPSPQGSYQPSPSPQSYHQVAPSPAGYQNTHSPASYHPTP-------SPMAYQASPSPS  946
+
+
+>5OIK_Z Structure of an RNA polymerase II-DSIF transcription elongation 
+complex [Homo sapiens]
+ 6GMH_Z Structure of activated transcription complex Pol II-DSIF-PAF-SPT6 
+[Homo sapiens]
+ 6GML_Z Structure of paused transcription complex Pol II-DSIF-NELF [Homo 
+sapiens]
+ 7OKX_Z Chain Z, Transcription elongation factor SPT5 [Homo sapiens]
+ 7OKY_Z Chain Z, Transcription elongation factor SPT5 [Homo sapiens]
+ 7OL0_Z Chain Z, Transcription elongation factor SPT5 [Homo sapiens]
+ 7PKS_Z Chain Z, Transcription elongation factor SPT5 [Homo sapiens]
+Length=1087
+
+ Score = 34.7 bits (78),  Expect = 1.8, Method: Compositional matrix adjust.
+ Identities = 30/85 (35%), Positives = 40/85 (47%), Gaps = 10/85 (12%)
+
+Query  444  SPKQRRRTPSPPPRRNRSPSPPARRRSPSPPKRGRSPPSRRRSPSPPPRRRVTPSPPQRR  503
+            +P+   +TP  P   N     P    +PSP  +G   P    SPSP    +V PSP   +
+Sbjct  871  NPQYNPQTPGTPAMYNTDQFSP--YAAPSP--QGSYQP----SPSPQSYHQVAPSPAGYQ  922
+
+Query  504  RSPSPPRRH-SPSPQ-RRRSPSPPP  526
+             + SP   H +PSP   + SPSP P
+Sbjct  923  NTHSPASYHPTPSPMAYQASPSPSP  947
+
+
+ Score = 33.1 bits (74),  Expect = 4.9, Method: Compositional matrix adjust.
+ Identities = 34/120 (28%), Positives = 48/120 (40%), Gaps = 18/120 (15%)
+
+Query  442  SPSPKQRRRTPSPPPRRNRSPSPPARRRSPSPPKRGRSPPSRRRSPSPPPRRRVTPSPPQ  501
+            +PSP+    TP+P     ++P  P     PS P+   +P    ++P  P         P 
+Sbjct  845  TPSPQAYGGTPNP-----QTPGYP----DPSSPQV--NPQYNPQTPGTPAMYNTDQFSPY  893
+
+Query  502  RRRSPSPPRRHSPSPQRRRSPSPPPRRRQQSPPPKRRSPSPPQKRRSVSPPQRRRSPPPS  561
+               SP    + SPSPQ     +P P   Q +  P    P+P       SP   + SP PS
+Sbjct  894  AAPSPQGSYQPSPSPQSYHQVAPSPAGYQNTHSPASYHPTP-------SPMAYQASPSPS  946
+
+
+>4RCO_A Chain A, 1.9 Angstrom Crystal Structure of Superantigen-like 
+Protein, Exotoxin from Staphylococcus aureus, in Complex with 
+Sialyl-LewisX. [Staphylococcus aureus subsp. aureus NCTC 8325]
+ 4RCO_B Chain B, 1.9 Angstrom Crystal Structure of Superantigen-like 
+Protein, Exotoxin from Staphylococcus aureus, in Complex with 
+Sialyl-LewisX. [Staphylococcus aureus subsp. aureus NCTC 8325]
+Length=295
+
+ Score = 33.9 bits (76),  Expect = 2.3, Method: Composition-based stats.
+ Identities = 21/81 (26%), Positives = 34/81 (42%), Gaps = 13/81 (16%)
+
+Query  348  KEKASKSVPEEKTVERESKKEHSPPPPSPETKASPAPRTSRRSYSPPPQKRRTLSPPSKK  407
+            K +A +S P    +E    K ++  PPS + +A             P Q     +PPS K
+Sbjct  24   KVEAPQSTPPSTKIEAPQSKPNATTPPSTKVEA-------------PQQTANATTPPSTK  70
+
+Query  408  QSPSPKPRSPSPVKSRRQSPP  428
+             +  P   +P P++S +   P
+Sbjct  71   VTTPPSTNTPQPMQSTKSDTP  91
+
+
+ Score = 32.3 bits (72),  Expect = 6.7, Method: Composition-based stats.
+ Identities = 18/79 (23%), Positives = 36/79 (46%), Gaps = 3/79 (4%)
+
+Query  482  SRRRSPSPPPRRRVTPSPPQRRRSPSPPRRHSPSPQRRRSPSPPPRRRQQSPPPKRRSPS  541
+            ++  +P   P      +P  +  + +PP     +PQ+  + + PP  +  + PP   +P 
+Sbjct  23   TKVEAPQSTPPSTKIEAPQSKPNATTPPSTKVEAPQQTANATTPPSTKVTT-PPSTNTPQ  81
+
+Query  542  PPQKRRSVSP--PQRRRSP  558
+            P Q  +S +P  P  ++ P
+Sbjct  82   PMQSTKSDTPQSPTTKQVP  100
+
+
+>3I2D_A Crystal Structure of S. Cerevisiae SUMO E3 Ligase SIZ1 [Saccharomyces 
+cerevisiae]
+Length=371
+
+ Score = 33.1 bits (74),  Expect = 4.1, Method: Composition-based stats.
+ Identities = 17/42 (40%), Positives = 26/42 (62%), Gaps = 2/42 (5%)
+
+Query  520  RSPSPPPRRRQQSPPPKRRSPSPPQKRRSVSPPQRRRSPPPS  561
+            RS   PP  +QQSP   R+SP+  Q+R++ +     R+PPP+
+Sbjct  11   RSMEGPPTVQQQSPSVIRQSPT--QRRKTSTTSSTSRAPPPT  50
+
+
+>5GKA_B cryo-EM structure of human Aichi virus [Aichi virus A846/88]
+Length=367
+
+ Score = 32.7 bits (73),  Expect = 5.5, Method: Composition-based stats.
+ Identities = 35/141 (25%), Positives = 55/141 (39%), Gaps = 12/141 (9%)
+
+Query  370  SPPPPSPETKASPAPRTSRRSYSPPPQKRRTLSPPSKKQSPSPKPRSPSPVKSRRQSPPS  429
+            +PP PSP     P PR   + ++ P       +PP+K  S   K   P+  ++   +  S
+Sbjct  35   TPPTPSPGDTEVPPPR---KPFTFP-------APPTKSGSRFSKWWEPAAARASESATDS  84
+
+Query  430  RRRSLTPAKKRRSPSPKQRRRTPSPPPRRNRSPSPPARRRSPSPPKRGR-SPPSRRRSPS  488
+                +  A K  S +  ++   P+  P    +P P     +PS  + G  S  +   +PS
+Sbjct  85   AIEGIDAAGKAASKAITRKLDRPA-APSSTANPQPSLIALNPSATQSGNASILTGSTAPS  143
+
+Query  489  PPPRRRVTPSPPQRRRSPSPP  509
+                   TP P      PS P
+Sbjct  144  LLAYPTATPVPLPNPDEPSQP  164
+
+
+>6PMG_X Solution structure of the C-terminal zinc finger of the C. elegans 
+protein MEX-5 [Caenorhabditis elegans]
+Length=35
+
+ Score = 28.5 bits (62),  Expect = 7.7, Method: Composition-based stats.
+ Identities = 12/24 (50%), Positives = 15/24 (63%), Gaps = 2/24 (8%)
+
+Query  68  CKYWVQDGQ--CPFGNTCRFVHPT  89
+           CK + + G   CP+G  C FVHPT
+Sbjct  9   CKNFARGGTGFCPYGLRCEFVHPT  32
+
+
+>6KWU_O A Crystal Structure of OspA mutant [Borreliella burgdorferi B31]
+Length=248
+
+ Score = 32.0 bits (71),  Expect = 8.8, Method: Composition-based stats.
+ Identities = 28/88 (32%), Positives = 39/88 (44%), Gaps = 4/88 (5%)
+
+Query  113  DLRTKMRNKRGSGGAS----ESGSSRETRSSRKDGSQSPKPKPESSGERSRSRSKKGVDL  168
+            D  T +  K  SGG+S     SG S E   +R DG++      +S G        KG  L
+Sbjct  83   DGSTLVSKKVTSGGSSTEEKSSGGSSEKIITRADGTRLEYTGIKSDGSGKAKEVLKGYVL  142
+
+Query  169  EGRLKAKNISPVVIAGPRSPESDAEQSG  196
+            EG L A+  + VV  G  +   +  +SG
+Sbjct  143  EGTLTAEKTTLVVKEGTVTLSKNISKSG  170
+
+
+>6J4S_A Structural basis of tubulin detyrosination by vasohibins-SVBP 
+enzyme complex and functional implications [Homo sapiens]
+Length=355
+
+ Score = 32.0 bits (71),  Expect = 9.1, Method: Compositional matrix adjust.
+ Identities = 20/50 (40%), Positives = 27/50 (54%), Gaps = 4/50 (8%)
+
+Query  501  QRRRSPSPPRRHSPSPQRRRSPSPPPRRRQQSPPPKR----RSPSPPQKR  546
+             R +   P   HSP+  R R  S  PRRRQ SPP +     +SP+ P+K+
+Sbjct  290  MRMKILKPASAHSPTQVRSRGKSLSPRRRQASPPRRLGRREKSPALPEKK  339
+
+
+
+Lambda      K        H        a         alpha
+   0.308    0.128    0.373    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 31953673122
+
+
+  Database: PDB protein database
+    Posted date:  Mar 5, 2022  4:55 AM
+  Number of letters in database: 36,687,441
+  Number of sequences in database:  136,281
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 11
+Window for multiple hits: 40

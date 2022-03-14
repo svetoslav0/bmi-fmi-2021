@@ -1,0 +1,105 @@
+BLASTP 2.12.0+
+
+
+Reference: Stephen F. Altschul, Thomas L. Madden, Alejandro A.
+Schaffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J.
+Lipman (1997), "Gapped BLAST and PSI-BLAST: a new generation of
+protein database search programs", Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for composition-based statistics: Alejandro A. Schaffer,
+L. Aravind, Thomas L. Madden, Sergei Shavirin, John L. Spouge, Yuri
+I. Wolf, Eugene V. Koonin, and Stephen F. Altschul (2001),
+"Improving the accuracy of PSI-BLAST protein database searches with
+composition-based statistics and other refinements", Nucleic Acids
+Res. 29:2994-3005.
+
+
+
+Database: PDB protein database
+           136,281 sequences; 36,687,441 total letters
+
+
+
+Query= ENST00000371953.8
+
+Length=8515
+
+
+***** No hits found *****
+
+
+
+Lambda      K        H        a         alpha
+   0.317    0.121    0.418    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 159071088735
+
+
+Query= ENST00000421745.7
+
+Length=15687
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+3WMY_A Crystal Structure of Streptomyces coelicolor alpha-L-arabi...  35.4    8.0  
+
+
+>3WMY_A Crystal Structure of Streptomyces coelicolor alpha-L-arabinofuranosidase 
+[Streptomyces coelicolor A3(2)]
+ 3WMZ_A Crystal Structure of Streptomyces coelicolor alpha-L-arabinofuranosidase 
+ethylmercury derivative [Streptomyces coelicolor 
+A3(2)]
+ 3WN0_A Crystal Structure of Streptomyces coelicolor alpha-L-arabinofuranosidase 
+in complex with L-arabinose [Streptomyces coelicolor 
+A3(2)]
+ 3WN1_A Crystal Structure of Streptomyces coelicolor alpha-L-arabinofuranosidase 
+in complex with xylotriose [Streptomyces coelicolor 
+A3(2)]
+ 3WN2_A Crystal Structure of Streptomyces coelicolor alpha-L-arabinofuranosidase 
+in complex with xylohexaose [Streptomyces coelicolor 
+A3(2)]
+Length=438
+
+ Score = 35.4 bits (80),  Expect = 8.0, Method: Compositional matrix adjust.
+ Identities = 43/133 (32%), Positives = 48/133 (36%), Gaps = 23/133 (17%)
+
+Query  15529  TTTATGACTAAAGTCACATG--TATGTATTAAACATTGAGGCTCTGTAGAGG--------  15578
+              T+T TG  T     C    G  TA GT     +C+    GG        + G        
+Sbjct  42     TSTDTGRLTVYGDKCLDVPGHATAPGTRVQIWSCS----GGANQQWRVNSDGTVVGVESG  97
+
+Query  15579  ---AGAGAGGATGTACCTCTCTGG-----TGCTGTTACAGTACATTCTGTACCTGCCATA  15630
+                   AGAG A GTA    TC GG     TG TGT    GT CA   T     TG  A  
+Sbjct  98     LCLEAAGAGTANGTAVQLWTCNGGGNQKWTGLTGTPPTDGT-CALPSTYRWSSTGVLAQP  156
+
+Query  15631  CAGGCTCATTTTC  15643
+               +G       TT 
+Sbjct  157    KSGWVALKDFTTV  169
+
+
+
+Lambda      K        H        a         alpha
+   0.321    0.126    0.466    0.792     4.96 
+
+Gapped
+Lambda      K        H        a         alpha    sigma
+   0.267   0.0410    0.140     1.90     42.6     43.6 
+
+Effective search space used: 286576265211
+
+
+  Database: PDB protein database
+    Posted date:  Mar 5, 2022  4:55 AM
+  Number of letters in database: 36,687,441
+  Number of sequences in database:  136,281
+
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Neighboring words threshold: 11
+Window for multiple hits: 40
