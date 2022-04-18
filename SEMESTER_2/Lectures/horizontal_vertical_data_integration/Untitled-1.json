@@ -1,0 +1,30 @@
+[
+    {
+        "$match": {
+            "OS_MONTHS": {
+                "$exists": True,
+                "$ne": ""
+            }
+        }
+    },
+    {
+        "$project": {
+            "STAGE": {
+                "$toString": "$TUMOR_STAGE"
+            },
+            "SIZE": {
+                "$toString": "$TUMOR_SIZE"
+            },
+            "AGE": {
+                "$toString": "$AGE_AT_DIAGNOSIS"
+            },
+            "ssa": {
+                "$concat": [
+                    "$STAGE",
+                    "$SIZE",
+                    "$AGE"
+                ]
+            }
+        }
+    }
+]

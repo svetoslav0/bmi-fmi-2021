@@ -27,7 +27,7 @@ if __name__ == '__main__':
     url = str(sys.argv[1])
     type = str(sys.argv[2])
 #"mongodb://62.44.127.198:27017"
-    client = MongoClient(url)
+    client = MongoClient("mongodb://root:rootpassword@localhost:27017")
     db = client.test
 
     print("Authentication is success")
