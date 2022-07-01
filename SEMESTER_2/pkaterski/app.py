@@ -159,3 +159,116 @@ def cnvsnp_update(id):
 def cnvsnp_delete(id):
     return delete_data('cnvsnp', id)
 
+@app.route("/patient-data/<id>", methods = ['GET'])
+def patient_data(id):
+    res = {}
+    res['clinical'] = db.clinical.find_one({'id': id})
+    res['rnaseq']   = db.rnaseq.find_one  ({'id': id})
+    res['mirseq']   = db.mirseq.find_one  ({'id': id})
+    res['cnvsnp']   = db.cnvsnp.find_one  ({'id': id})
+    return jsonify(res)
+
+def map_stage(stage):
+    if stage == "stage i":    return 1
+    if stage == "stage ia":   return 1.3
+    if stage == "stage ib":   return 1.6
+    if stage == "stage ii":   return 2
+    if stage == "stage iia":  return 2.3
+    if stage == "stage iib":  return 2.6
+    if stage == "stage iii":  return 3
+    if stage == "stage iiia": return 3.3
+    if stage == "stage iiib": return 3.6
+    if stage == "stage iv":   return 4
+    if stage == None:         return 0.5
+
+def map_stage_t(stage):
+    if stage == "t1"  : return 1
+    if stage == "t1a" : return 1.3
+    if stage == "t1b" : return 1.6
+    if stage == "t2"  : return 2
+    if stage == "t2a" : return 2.3
+    if stage == "t2b" : return 2.6
+    if stage == "t3"  : return 3
+    if stage == "t3a" : return 3.3
+    if stage == "t3b" : return 3.6
+    if stage == "t4"  : return 4
+    if stage == "tx"  : return 0.5
+    if stage == None  : return 0.5
+
+def map_stage_n(stage):
+    if stage == "n0"  : return 0
+    if stage == "n1"  : return 1
+    if stage == "n1a" : return 1.3
+    if stage == "n1b" : return 1.6
+    if stage == "n2"  : return 2
+    if stage == "n2a" : return 2.3
+    if stage == "n2b" : return 2.6
+    if stage == "n3"  : return 3
+    if stage == "n3a" : return 3.3
+    if stage == "n3b" : return 3.6
+    if stage == "n4"  : return 4
+    if stage == "nx"  : return 0.5
+    if stage == None  : return 0.5
+
+def map_stage_m(stage):
+    if stage == "m0"  : return 0
+    if stage == "m1"  : return 1
+    if stage == "m1a" : return 1.3
+    if stage == "m1b" : return 1.6
+    if stage == "m2"  : return 2
+    if stage == "m2a" : return 2.3
+    if stage == "m2b" : return 2.6
+    if stage == "m3"  : return 3
+    if stage == "m3a" : return 3.3
+    if stage == "m3b" : return 3.6
+    if stage == "m4"  : return 4
+    if stage == "mx"  : return 0.5
+    if stage == None  : return 0.5
+
+@app.route("/update-model", methods = ['POST'])
+def update_model():
+    data = db.clinical.find()
+    training_data = []
+    for row in data:
+        try:
+            yearstobirth          = row['yearstobirth']
+            vitalstatus           = row['vitalstatus']
+            daystodeath           = row['daystodeath']
+            daystolastfollowup    = row['daystolastfollowup']
+            daystolastknownalive  = row['daystolastknownalive']
+
+            pathologicstage       = row['pathologicstage']
+            pathologyTstage       = row['pathologyTstage']
+            pathologyNstage       = row['pathologyNstage']
+            pathologyMstage       = row['pathologyMstage']
+
+            numberpackyearssmoked = row['numberpackyearssmoked']
+
+            # |-------------------|
+            # |set variable values|
+            # |-------------------|
+            days_to_live = None
+            if vitalstatus:
+                days_to_live = daystodeath
+            elif daystolastknownalive:
+                days_to_live = daystolastknownalive
+            else:
+                days_to_live = daystolastfollowup
+
+            age     = yearstobirth
+            stage   = map_stage(pathologicstage)
+            stage_t = map_stage_t(pathologyTstage)
+            stage_n = map_stage_n(pathologyNstage)
+            stage_m = map_stage_m(pathologyMstage)
+
+            packs_smoked = numberpackyearssmoked
+
+            training_data.append({'x': [age, stage, stage_t, stage_n, stage_m, packs_smoked], 'y': [days_to_live]})
+            print(training_data)
+
+        except:
+            print('missing data in row: ' + str(row))
+            pass
+    return jsonify(training_data)
+
+
