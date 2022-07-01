@@ -155,6 +155,24 @@ router.post('/treatments', (req, res) => {
         });
 });
 
+router.get('/treatments/:id', (req, res) => {
+    const id = req.params.id;
+
+    getDb()
+        .collection('treatments')
+        .findOne({ _id: new ObjectId(id) }, (err, result) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (!result) {
+                return res.status(404).json({ message: 'Not found' });
+            }
+
+            res.json(result);
+        });
+});
+
 export {
     router
 };
