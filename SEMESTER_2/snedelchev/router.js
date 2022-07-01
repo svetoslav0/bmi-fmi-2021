@@ -1,15 +1,16 @@
-import express from "express";
+import express from 'express';
+import { ObjectId } from 'mongodb';
 
-import { getDb } from "./database.js";
+import { getDb } from './database.js';
+import { removeUndefinedProps } from './helpers/utils.js';
 import { ExposureFormatBuilder } from './helpers/ExposureFormatBuilder.js';
-import { DataFormatBuilder } from "./helpers/DataFormatBuilder.js";
-import { ObjectId } from "mongodb";
+import { DataFormatBuilder } from './helpers/DataFormatBuilder.js';
 
 const router = express.Router();
 
 
 router.post('/exposures', (req, res) => {
-    const data = ExposureFormatBuilder.formatCreate(req.body);
+    const data = ExposureFormatBuilder.formatCreateOrUpdate(req.body);
 
     getDb()
         .collection('exposures')
@@ -27,7 +28,9 @@ router.post('/exposures', (req, res) => {
                     console.error(err);
                 }
 
-                res.status(201).json({ success: true });
+                return res
+                    .status(201)
+                    .json({ insertedId: result.insertedId });
             });
         });
 });
@@ -65,6 +68,40 @@ router.get('/exposures', (req, res) => {
             }
 
             res.json(result);
+        });
+});
+
+router.patch('/exposures/:id', (req, res) => {
+    const id = req.params.id;
+    const data = ExposureFormatBuilder.formatCreateOrUpdate(req.body);
+    removeUndefinedProps(data);
+
+    console.log(data);
+
+    getDb()
+        .collection('exposures')
+        .findOne({ _id: new ObjectId(id) }, (err, result) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (!result) {
+                return res.status(404).json({ message: 'Not found' });
+            }
+
+            const updated = {
+                $set: { ...result, ...data }
+            };
+
+            getDb()
+                .collection('exposures')
+                .updateOne({ _id: new ObjectId(result._id) }, updated, err => {
+                    if (err) {
+                        console.error(err);
+                    }
+
+                    res.status(204).json();
+                });
         });
 });
 

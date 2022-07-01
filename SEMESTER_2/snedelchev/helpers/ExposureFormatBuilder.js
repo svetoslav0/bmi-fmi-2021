@@ -1,5 +1,5 @@
 export class ExposureFormatBuilder {
-    static formatCreate(data) {
+    static formatCreateOrUpdate(data) {
         return {
             cigarettes_per_day: data.cigarettes_per_day ? +data.cigarettes_per_day : null,
             alcohol_history: data.alcohol_history,
