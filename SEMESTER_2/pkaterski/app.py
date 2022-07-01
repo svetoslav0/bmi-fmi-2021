@@ -4,6 +4,10 @@ from pymongo import MongoClient
 from pymongo.results import InsertManyResult
 import json
 
+from sklearn.linear_model import Ridge
+from sklearn.exceptions import NotFittedError
+import numpy as np
+
 class ObjectIdEncoder(json.JSONEncoder):
 
     def default(self, obj):
@@ -225,50 +229,105 @@ def map_stage_m(stage):
     if stage == "mx"  : return 0.5
     if stage == None  : return 0.5
 
-@app.route("/update-model", methods = ['POST'])
-def update_model():
+def exists(x):
+    return x != None
+
+model = Ridge(alpha=1.0)
+
+def converta_data(row, only_x = False):
+    yearstobirth          = None
+    vitalstatus           = None
+    daystodeath           = None
+    daystolastfollowup    = None
+    daystolastknownalive  = None
+
+    if not only_x:
+        yearstobirth          = row['yearstobirth']
+        vitalstatus           = row['vitalstatus']
+        daystodeath           = row['daystodeath']
+        daystolastfollowup    = row['daystolastfollowup']
+        daystolastknownalive  = row['daystolastknownalive']
+    
+    pathologicstage       = row['pathologicstage']
+    pathologyTstage       = row['pathologyTstage']
+    pathologyNstage       = row['pathologyNstage']
+    pathologyMstage       = row['pathologyMstage']
+    
+    numberpackyearssmoked = row['numberpackyearssmoked']
+
+    # |-------------------|
+    # |set variable values|
+    # |-------------------|
+    days_to_live = None
+    if not only_x:
+        if vitalstatus:
+            days_to_live = daystodeath
+        elif daystolastknownalive:
+            days_to_live = daystolastknownalive
+        else:
+            days_to_live = daystolastfollowup
+
+    age     = yearstobirth or 50
+    stage   = map_stage(pathologicstage)
+    stage_t = map_stage_t(pathologyTstage)
+    stage_n = map_stage_n(pathologyNstage)
+    stage_m = map_stage_m(pathologyMstage)
+    if exists(age) and exists(stage)and exists(stage_t) and exists(stage_n) and exists(stage_m):
+        X = [age, stage, stage_t, stage_n, stage_m]
+        if only_x:
+            return X, None
+        elif exists(days_to_live):
+            Y = (days_to_live)
+            return X, Y
+        else:
+            raise Exception('Unable to convert')
+    else:
+       raise Exception('Unable to convert') 
+
+
+def fit_model():
     data = db.clinical.find()
-    training_data = []
+    training_data_X = []
+    training_data_Y = []
     for row in data:
         try:
-            yearstobirth          = row['yearstobirth']
-            vitalstatus           = row['vitalstatus']
-            daystodeath           = row['daystodeath']
-            daystolastfollowup    = row['daystolastfollowup']
-            daystolastknownalive  = row['daystolastknownalive']
+            x, y = converta_data(row)
 
-            pathologicstage       = row['pathologicstage']
-            pathologyTstage       = row['pathologyTstage']
-            pathologyNstage       = row['pathologyNstage']
-            pathologyMstage       = row['pathologyMstage']
-
-            numberpackyearssmoked = row['numberpackyearssmoked']
-
-            # |-------------------|
-            # |set variable values|
-            # |-------------------|
-            days_to_live = None
-            if vitalstatus:
-                days_to_live = daystodeath
-            elif daystolastknownalive:
-                days_to_live = daystolastknownalive
-            else:
-                days_to_live = daystolastfollowup
-
-            age     = yearstobirth
-            stage   = map_stage(pathologicstage)
-            stage_t = map_stage_t(pathologyTstage)
-            stage_n = map_stage_n(pathologyNstage)
-            stage_m = map_stage_m(pathologyMstage)
-
-            packs_smoked = numberpackyearssmoked
-
-            training_data.append({'x': [age, stage, stage_t, stage_n, stage_m, packs_smoked], 'y': [days_to_live]})
-            print(training_data)
+            training_data_X.append(x)
+            training_data_Y.append(y)
 
         except:
             print('missing data in row: ' + str(row))
             pass
-    return jsonify(training_data)
+    model.fit(np.array(training_data_X), np.array(training_data_Y))
 
+@app.route("/update-model", methods = ['POST'])
+def update_model():
+    try:
+        fit_model()
+        return 'ok', 200
+    except:
+        return 'training error occured', 500
+
+
+@app.route("/predict", methods = ['POST'])
+def predict():
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        my_json = request.json
+        try:
+            x, _ = converta_data(my_json, only_x=True)
+
+            res = None
+            try:
+               res = model.predict([x]) 
+            except NotFittedError as e:
+                fit_model()
+                res = model.predict([x])
+
+            return jsonify({ 'predicted days to death:' : res[0] })
+        except:
+            return 'Something bad happened :(', 500
+    else:
+        return 'Content-Type not supported!', 400
 
