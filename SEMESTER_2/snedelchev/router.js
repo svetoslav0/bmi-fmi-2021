@@ -50,6 +50,24 @@ router.get('/exposures/:id', (req, res) => {
         });
 });
 
+router.get('/exposures', (req, res) => {
+    const limit = +req.query.limit || 10;
+    const offset = +req.query.offset || 0;
+
+    getDb()
+        .collection('exposures')
+        .find()
+        .limit(limit)
+        .skip(offset)
+        .toArray((err, result) => {
+            if (err) {
+                console.log(err);
+            }
+
+            res.json(result);
+        });
+});
+
 router.post('/', (req, res) => {
     const data = DataFormatBuilder.formatAddData(req.body);
 
