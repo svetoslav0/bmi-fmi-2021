@@ -4,10 +4,9 @@ import { ObjectId } from 'mongodb';
 import { getDb } from './database.js';
 import { removeUndefinedProps } from './helpers/utils.js';
 import { ExposureFormatBuilder } from './helpers/ExposureFormatBuilder.js';
-import { DataFormatBuilder } from './helpers/DataFormatBuilder.js';
+import { TreatmentsFormatBuilder } from './helpers/TreatmentsFormatBuilder.js';
 
 const router = express.Router();
-
 
 router.post('/exposures', (req, res) => {
     const data = ExposureFormatBuilder.formatCreateOrUpdate(req.body);
@@ -129,36 +128,30 @@ router.delete('/exposures/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
-    const data = DataFormatBuilder.formatAddData(req.body);
+router.post('/treatments', (req, res) => {
+    const data = TreatmentsFormatBuilder.formatCreateOrUpdate(req.body);
 
     getDb()
-        .collection('clinical_data')
+        .collection('treatments')
         .insertOne(data, (error, result) => {
             if (error) {
                 console.error(error);
             }
 
-            console.log(result);
-            res.json({
-                success: true
-            });
-        });
-});
+            data.treatment_id = data._id.toString();
+            const updated = { $set: data };
 
-router.get('/', (req, res) => {
-    const databaseConnection = getDb();
+            getDb()
+                .collection('treatments')
+                .updateOne({ _id: new ObjectId(data.treatment_id) }, updated, err => {
+                    if (err) {
+                        console.error(err);
+                    }
 
-    const data = {};
-
-    databaseConnection.collection('clinical_data')
-        .insertOne(data, function(err, result) {
-            if (err) {
-                console.log(err)
-            }
-
-            console.log(result);
-            res.send('Success!');
+                    return res
+                        .status(201)
+                        .json({ insertedId: result.insertedId });
+                });
         });
 });
 
