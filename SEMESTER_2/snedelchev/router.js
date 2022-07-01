@@ -76,8 +76,6 @@ router.patch('/exposures/:id', (req, res) => {
     const data = ExposureFormatBuilder.formatCreateOrUpdate(req.body);
     removeUndefinedProps(data);
 
-    console.log(data);
-
     getDb()
         .collection('exposures')
         .findOne({ _id: new ObjectId(id) }, (err, result) => {
@@ -102,6 +100,32 @@ router.patch('/exposures/:id', (req, res) => {
 
                     res.status(204).json();
                 });
+        });
+});
+
+router.delete('/exposures/:id', (req, res) => {
+    const id = req.params.id;
+
+    getDb()
+        .collection('exposures')
+        .findOne({ _id: new ObjectId(id) }, (err, result) => {
+            if (err) {
+                console.error(err);
+            }
+
+            if (!result) {
+                return res.status(404).json({ message: 'Not found' });
+            }
+
+            getDb()
+                .collection('exposures')
+                .deleteOne({ _id: new ObjectId(id) }, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+
+                    res.status(204).json();
+                })
         });
 });
 
