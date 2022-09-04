@@ -1,0 +1,54 @@
+{
+    "mappings": {
+        "properties": {
+            "days_to_treatment_end":  {
+                "type": "integer"
+            },
+            "days_to_treatment_start":  {
+                "type": "integer"
+            },
+            "treatment_id":  {
+                "type": "keyword"
+            },
+            "submitter_id":  {
+                "type": "keyword"
+            },
+            "treatment_type":  {
+                "type": "keyword"
+            },
+            "regimen_or_line_of_therapy": {
+                "type": "keyword"
+            },
+            "treatment_effect":  {
+                "type": "keyword"
+            },
+            "therapeutic_agents":  {
+                "type": "keyword"
+            },
+            "treatment_or_therapy":  {
+                "type": "keyword"
+            },
+            "created_datetime":  {
+                "type": "date"
+            },
+            "initial_disease_status":  {
+                "type": "keyword"
+            },
+            "treatment_intent_type":  {
+                "type": "keyword"
+            },
+            "treatment_anatomic_site":  {
+                "type": "keyword"
+            },
+            "updated_datetime":  {
+                "type": "date"
+            },
+            "treatment_outcome":  {
+                "type": "keyword"
+            },
+            "state":  {
+                "type": "keyword"
+            }
+        }
+    }
+}

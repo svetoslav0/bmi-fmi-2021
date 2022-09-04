@@ -1,0 +1,33 @@
+{
+    "mappings": {
+        "properties": {
+            "cigarettes_per_day":  {
+                "type": "integer"
+            },
+            "alcohol_history":  {
+                "type": "keyword"
+            },
+            "updated_datetime":  {
+                "type": "date"
+            },
+            "exposure_id":  {
+                "type": "keyword"
+            },
+            "submitter_id":  {
+                "type": "keyword"
+            },
+            "years_smoked":  {
+                "type": "integer"
+            },
+            "state":  {
+                "type": "keyword"
+            },
+            "created_datetime":  {
+                "type": "date"
+            },
+            "alcohol_intensity":  {
+                "type": "keyword"
+            }
+        }
+    }
+}
