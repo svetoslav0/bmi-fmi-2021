@@ -4,8 +4,8 @@
     using Microsoft.AspNetCore.Mvc;
 
     using KidneyCarcinomaRestApi.Models;
-    using KidneyCarcinomaRestApi.Services;
     using KidneyCarcinomaRestApi.Attributes;
+    using KidneyCarcinomaRestApi.Interfaces;
     using KidneyCarcinomaRestApi.Models.Parameters;
 
     [ApiController]
@@ -13,20 +13,20 @@
     [ExceptionHandler]
     public class DiagnosisController : AbstractController
     {
-        private readonly MongoDbService mongoDbService;
+        private readonly IDiagnosesService diagnosesService;
 
-        public DiagnosisController(MongoDbService mongoDbService)
+        public DiagnosisController(IDiagnosesService diagnosesService)
         {
-            this.mongoDbService = mongoDbService;
+            this.diagnosesService = diagnosesService;
         }
 
         [HttpGet]
         [Route("")]
         [Paginated(DefaultLimit, DefaultOffset)]
-        public IActionResult GetAll([FromQuery] AbstractParameters parameters)
+        public IActionResult GetAll([FromQuery] AbstractParameters parameters, [FromQuery] Diagnose searchParameters)
         {
-            List<Diagnose> result = this.mongoDbService.GetAllDiagnoses(parameters).Result;
-            long total = this.mongoDbService.GetAllDiagnosesCount();
+            List<Diagnose> result = this.diagnosesService.GetAllDiagnoses(parameters, searchParameters);
+            long total = this.diagnosesService.GetAllDiagnosesCount(searchParameters);
 
             return this.BuildListResponse(result, total);
         }
@@ -35,7 +35,7 @@
         [Route("{id}")]
         public IActionResult GetById(string id)
         {
-            var result = this.mongoDbService.GetDiagnoseById(id);
+            var result = this.diagnosesService.GetDiagnoseById(id);
 
             return this.BuildResponse(result);
         }

@@ -12,7 +12,7 @@
 
         private readonly string DefaultContentType = "application/json";
 
-        protected IActionResult BuildListResponse(object content, long total = 0)
+        protected IActionResult BuildListResponse(object content, long total = 0L)
         {
             DataListResponse response = new DataListResponse
             {

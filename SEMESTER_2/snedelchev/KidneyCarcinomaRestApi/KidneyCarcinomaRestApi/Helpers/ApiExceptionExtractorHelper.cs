@@ -42,7 +42,7 @@
 
             return parameterProp != null
                 ? parameterProp.GetValue(exceptionObj)?.ToString()
-                : RecursiveExceptionPropValueExtract(((ApiException)exceptionObj).InnerException, name, ++currentDepth);
+                : RecursiveExceptionPropValueExtract(((Exception)exceptionObj).InnerException, name, ++currentDepth);
         }
     }
 }

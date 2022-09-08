@@ -10,5 +10,10 @@
         {
             return new BadRequestObjectResult(exception.Message);
         }
+
+        public IActionResult Visit(ApiNotFoundException exception)
+        {
+            return new NotFoundObjectResult(exception.Message);
+        }
     }
 }

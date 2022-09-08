@@ -7,5 +7,7 @@
     public interface IApiExceptionVisitor
     {
         public IActionResult Visit(ApiBadRequestException exception);
+        
+        public IActionResult Visit(ApiNotFoundException exception);
     }
 }

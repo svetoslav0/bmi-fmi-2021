@@ -1,6 +1,8 @@
 ﻿namespace KidneyCarcinomaRestApi.Exceptions
 {
     using System;
+    using KidneyCarcinomaRestApi.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
 
     public abstract class ApiException : Exception
     {
@@ -18,5 +20,7 @@
         {
             return apiException.GetType().IsSubclassOf(typeof(ApiException));
         }
+        
+        public abstract IActionResult Accept(IApiExceptionVisitor visitor);
     }
 }

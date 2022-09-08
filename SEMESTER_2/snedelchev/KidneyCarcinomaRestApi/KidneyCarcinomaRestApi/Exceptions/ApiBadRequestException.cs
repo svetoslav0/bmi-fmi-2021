@@ -1,6 +1,8 @@
 ﻿namespace KidneyCarcinomaRestApi.Exceptions
 {
     using System;
+    using KidneyCarcinomaRestApi.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
 
     public class ApiBadRequestException : ApiException
     {
@@ -18,5 +20,10 @@
         }
         
         public string Parameter { get; }
+
+        public override IActionResult Accept(IApiExceptionVisitor visitor)
+        {
+            return visitor.Visit(this);
+        }
     }
 }

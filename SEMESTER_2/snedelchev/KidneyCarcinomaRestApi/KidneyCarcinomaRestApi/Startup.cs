@@ -1,21 +1,17 @@
-using KidneyCarcinomaRestApi.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace KidneyCarcinomaRestApi
 {
-    using KidneyCarcinomaRestApi.Models.Mongo;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
+    using KidneyCarcinomaRestApi.Interfaces;
+    using KidneyCarcinomaRestApi.Models;
+
+    using MongoDB.Driver;
+
+    using KidneyCarcinomaRestApi.Services;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -30,9 +26,24 @@ namespace KidneyCarcinomaRestApi
         {
             services.AddControllers();
 
-            services.Configure<MongoDbSettings>(Configuration.GetSection("MongoDb"));
+            IConfigurationSection mongoConfig = Configuration.GetSection("MongoDb");
 
-            services.AddSingleton<MongoDbService>();
+            string mongoConnectionString = mongoConfig.GetValue<string>("ConnectionUri");
+            string databaseName = mongoConfig.GetValue<string>("DatabaseName");
+            string diagnosesCollectionName = mongoConfig.GetValue<string>("DiagnosesCollectionName");
+            string casesCollectionName = mongoConfig.GetValue<string>("CasesCollectionName");
+            
+            MongoClient mongoClient = new MongoClient(mongoConnectionString);
+            IMongoDatabase database = mongoClient.GetDatabase(databaseName);
+            
+            IMongoCollection<Diagnose> diagnosesCollection = database.GetCollection<Diagnose>(diagnosesCollectionName);
+            IMongoCollection<Case> casesCollection = database.GetCollection<Case>(casesCollectionName);
+            
+            IDiagnosesService diagnosesService = new DiagnosesService(diagnosesCollection);
+            ICasesService casesService = new CasesService(casesCollection);
+
+            services.AddSingleton(diagnosesService);
+            services.AddSingleton(casesService);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
