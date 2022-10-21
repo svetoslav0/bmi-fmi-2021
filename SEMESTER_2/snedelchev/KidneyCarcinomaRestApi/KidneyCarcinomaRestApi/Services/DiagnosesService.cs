@@ -1,6 +1,7 @@
 ﻿#nullable enable
 namespace KidneyCarcinomaRestApi.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -64,6 +65,11 @@ namespace KidneyCarcinomaRestApi.Services
             }
 
             return result;
+        }
+
+        public void Save(Diagnose diagnose)
+        {
+            this.diagnosesCollection.InsertOne(diagnose);
         }
 
         private FilterDefinition<Diagnose>[] BuildSearchFilter(Diagnose searchParameters)

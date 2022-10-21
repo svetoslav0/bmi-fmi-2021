@@ -1,5 +1,6 @@
 ﻿namespace KidneyCarcinomaRestApi.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
 
@@ -35,9 +36,22 @@
         [Route("{id}")]
         public IActionResult GetById(string id)
         {
-            var result = this.diagnosesService.GetDiagnoseById(id);
+            Diagnose result = this.diagnosesService.GetDiagnoseById(id);
 
             return this.BuildResponse(result);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public IActionResult Create([FromForm] Diagnose diagnose)
+        {
+            diagnose.DiagnoseId = Guid.NewGuid().ToString();
+            diagnose.CreatedDateTime = DateTime.Now;
+            diagnose.UpdatedDateTime = DateTime.Now;
+
+            this.diagnosesService.Save(diagnose);
+            
+            return this.BuildResponse(new { success = true });
         }
     }
 }

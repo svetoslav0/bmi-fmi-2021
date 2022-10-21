@@ -11,5 +11,7 @@
         public long GetAllDiagnosesCount(Diagnose searchParameters);
 
         public Diagnose GetDiagnoseById(string id);
+
+        public void Save(Diagnose diagnose);
     }
 }
