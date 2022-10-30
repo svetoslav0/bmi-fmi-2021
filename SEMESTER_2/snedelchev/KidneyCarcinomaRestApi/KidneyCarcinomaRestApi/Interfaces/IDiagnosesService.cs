@@ -12,6 +12,8 @@
 
         public Diagnose GetDiagnoseById(string id);
 
-        public void Save(Diagnose diagnose);
+        public Diagnose Save(Diagnose diagnose);
+
+        public Diagnose Update(string id, Diagnose diagnose);
     }
 }

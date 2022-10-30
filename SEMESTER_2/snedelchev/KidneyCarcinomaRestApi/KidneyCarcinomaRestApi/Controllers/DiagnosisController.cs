@@ -37,7 +37,6 @@
         public IActionResult GetById(string id)
         {
             Diagnose result = this.diagnosesService.GetDiagnoseById(id);
-
             return this.BuildResponse(result);
         }
 
@@ -45,13 +44,16 @@
         [Route("")]
         public IActionResult Create([FromForm] Diagnose diagnose)
         {
-            diagnose.DiagnoseId = Guid.NewGuid().ToString();
-            diagnose.CreatedDateTime = DateTime.Now;
-            diagnose.UpdatedDateTime = DateTime.Now;
+            Diagnose saved = this.diagnosesService.Save(diagnose);
+            return this.BuildResponse(saved);
+        }
 
-            this.diagnosesService.Save(diagnose);
-            
-            return this.BuildResponse(new { success = true });
+        [HttpPatch]
+        [Route("{id}")]
+        public IActionResult Update(string id, [FromForm] Diagnose diagnose)
+        {
+            Diagnose updated = this.diagnosesService.Update(id, diagnose);
+            return this.BuildResponse(updated);
         }
     }
 }

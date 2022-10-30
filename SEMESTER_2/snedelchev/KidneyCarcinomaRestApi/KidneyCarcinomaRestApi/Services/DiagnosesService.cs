@@ -67,9 +67,30 @@ namespace KidneyCarcinomaRestApi.Services
             return result;
         }
 
-        public void Save(Diagnose diagnose)
+        public Diagnose Save(Diagnose diagnose)
         {
+            diagnose.DiagnoseId = Guid.NewGuid().ToString();
+            diagnose.CreatedDateTime = DateTime.Now;
+            diagnose.UpdatedDateTime = DateTime.Now;
+
             this.diagnosesCollection.InsertOne(diagnose);
+
+            return diagnose;
+        }
+
+        public Diagnose Update(string id, Diagnose diagnose)
+        {
+            Diagnose foundDiagnose = this.GetDiagnoseById(id);
+            
+            diagnose.Id = foundDiagnose.Id;
+            diagnose.DiagnoseId = foundDiagnose.DiagnoseId;
+            diagnose.UpdatedDateTime = DateTime.Now;
+            diagnose.CreatedDateTime = foundDiagnose.CreatedDateTime;
+            
+            FilterDefinition<Diagnose> filter = Builders<Diagnose>.Filter.Eq("diagnosis_id", diagnose.DiagnoseId);
+            this.diagnosesCollection.ReplaceOne(filter, diagnose);
+
+            return diagnose;
         }
 
         private FilterDefinition<Diagnose>[] BuildSearchFilter(Diagnose searchParameters)
