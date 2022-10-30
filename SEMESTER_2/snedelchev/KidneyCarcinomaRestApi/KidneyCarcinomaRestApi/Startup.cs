@@ -39,10 +39,10 @@ namespace KidneyCarcinomaRestApi
             IMongoCollection<Diagnose> diagnosesCollection = database.GetCollection<Diagnose>(diagnosesCollectionName);
             IMongoCollection<Case> casesCollection = database.GetCollection<Case>(casesCollectionName);
             
-            IDiagnosesService diagnosesService = new DiagnosesService(diagnosesCollection);
+            IDiagnosisService diagnosisService = new DiagnosiService(diagnosesCollection);
             ICasesService casesService = new CasesService(casesCollection);
 
-            services.AddSingleton(diagnosesService);
+            services.AddSingleton(diagnosisService);
             services.AddSingleton(casesService);
         }
 

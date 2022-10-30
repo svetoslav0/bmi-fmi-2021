@@ -4,7 +4,7 @@
     using KidneyCarcinomaRestApi.Models;
     using KidneyCarcinomaRestApi.Models.Parameters;
 
-    public interface IDiagnosesService
+    public interface IDiagnosisService
     {
         public List<Diagnose> GetAllDiagnoses(AbstractParameters parameters, Diagnose searchParameters);
 

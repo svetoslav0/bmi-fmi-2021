@@ -14,11 +14,11 @@ namespace KidneyCarcinomaRestApi.Services
     using MongoDB.Bson.Serialization.Attributes;
     using MongoDB.Driver;
 
-    public class DiagnosesService : IDiagnosesService
+    public class DiagnosiService : IDiagnosisService
     {
         private readonly IMongoCollection<Diagnose> diagnosesCollection;
 
-        public DiagnosesService(IMongoCollection<Diagnose> diagnosesCollection)
+        public DiagnosiService(IMongoCollection<Diagnose> diagnosesCollection)
         {
             this.diagnosesCollection = diagnosesCollection;
         }
